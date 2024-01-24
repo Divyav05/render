@@ -4,7 +4,7 @@ const StationSchema = new mongoose.Schema({
   /*email: { type: String, required: true, unique: true },
   password: { type: String, required: true },*/
   name: { type: String, required: true },
-  /phone: { type: Number },/
+  /*phone: { type: Number },*/
   photo: { type: String },
   address: { type: String },
   price: { type: String },
