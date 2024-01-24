@@ -2,41 +2,38 @@ import express from "express"
 import cookieParser from "cookie-parser"
 import cors from "cors"
 import mongoose from "mongoose"
-
+import dotenv from "dotenv"
 import authRoute from "./Routes/auth.js"
 import userRoute from "./Routes/user.js"
 import stationRoute from "./Routes/station.js"
 import bookingRoute from "./Routes/booking.js"
 
+dotenv.config()
 
-const app = express();
-const port = process.env.PORT || 8000;
+const app = express()
+const port = process.env.PORT || 8000
 
 const corsOptions = {
-  origin: true,
-};
+  origin: true
+}
 
 app.get("/", (req, res) => {
-  res.send("API is working");
-});
+  res.send("Api is working")
+})
 
-// Middleware to disable strict mode for query (optional)
-mongoose.set('strictQuery', false);
-
-
-const connectDB = async () => {
-  try {
-    await mongoose.connect('mongodb+srv://tarunrajasekar:tarun@cluster0.pdayobc.mongodb.net/', {
+//database connection
+mongoose.set('strictQuery', false)
+const connectDB = async() => {
+  try{
+    await mongoose.connect(process.env.MONGO_URL, {
       useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log('MongoDB connected');
-  } catch (err) {
-    console.error('MongoDB connection failed:', err);
+      useUnifiedTopology: true
+    })
+    console.log('MongoDB database is connected')
+  } catch(err){
+    console.log('MongoDB database connnection is failed')
   }
-};
-
-export default connectDB;
+}
 
 //middleware 
 app.use(express.json())
